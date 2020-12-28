@@ -10,8 +10,6 @@
 #include <string.h>
 using namespace std;
 
-
-
 vector <float> open_Row_policy(float hit_latency,float miss_latency,float conflict_latency,vector <int> row,vector <int> column,vector <float> time_of_arrival){
 
 int num_iterations=row.size();
@@ -88,11 +86,6 @@ time_of_completion[0]=conflict_latency;
    return closeRow;
 }
 
-
-
-
-
-
 int main(int argc,char *argv[])
 {
 
@@ -102,11 +95,10 @@ int main(int argc,char *argv[])
     string outputFileName = "19112089_"+inputFilename;
     outfile.open(outputFileName);
 
-    outfile<<"Row,Column  "<<setw(13)<<"TimeOfArrival"<<setw(15)<<"OpenRow"<<setw(10)<<"CloseRow"<<setw(10)<<endl;
-
-        float hit_latency=5;
-        float miss_latency=15;
-        float conflict_latency=29;
+   outfile<<"Row,Column"<<setw(15)<<"TimeOfArrival"<<setw(15)<<"OpenRow"<<setw(10)<<"CloseRow"<<setw(10)<<endl;
+        float hit_latency=30;
+        float miss_latency=60;
+        float conflict_latency=90;
 
         int num_rows=64;
         int num_columns=48;
@@ -183,9 +175,12 @@ vector <string> toa;
        vector <float> ans_close ;
        ans_open=  open_Row_policy(hit_latency,miss_latency,conflict_latency,row,column,time_of_arrival);
        ans_close= close_Row_policy(hit_latency,miss_latency,conflict_latency,row,column,time_of_arrival);
-
+   
+   
        for(int i=0;i<row.size();i++){
-       outfile<<row[i]<<","<<column[i]<<setw(13)<<time_of_arrival[i]<<setw(15)<<ans_open[i]<<setw(10)<<ans_close[i]<<setw(10)<<endl;
+       string temp1=r[i]+","+c[i];
+       outfile<<temp1<<setw(15)<<time_of_arrival[i]<<setw(15)<<ans_open[i]<<setw(10)<<ans_close[i]<<setw(10)<<endl;
+      
        }
 return 0;
 }
